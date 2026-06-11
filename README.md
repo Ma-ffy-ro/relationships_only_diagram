@@ -1,75 +1,54 @@
-# Nuxt Minimal Starter
+# 物語テキスト キャラクター相関図 自動生成システム
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+物語テキストを入力すると、Google Gemini API がキャラクターと関係性を自動抽出し、インタラクティブな相関図として可視化するWebアプリです。
 
-## Setup
+## スクリーンショット
 
-Make sure to install dependencies:
+**入力画面**
+![入力画面](relationships_before.png)
+
+**解析結果（相関図）**
+![解析結果](relationships_after.png)
+
+## 主な機能
+
+- **テキスト解析**: 貼り付けたテキストや Excel / CSV / TXT ファイルから物語を読み込み、Gemini API でキャラクターと関係性を自動抽出
+- **相関図表示**: vis-network による有向グラフ。ノードをクリックすると関連エッジを強調表示
+- **複数作品対応**: 複数のファイルを同時に読み込み、作品単位で切り替えながら比較
+- **JSON出力**: 抽出結果をJSON形式でダウンロード
+- **評価機能**: 正解JSONを読み込んでF1スコア（適合率・再現率）を算出し、比較結果をExcelで出力
+- **まとめ比較**: 複数作品のF1比較ファイルをまとめて集計
+
+## 技術スタック
+
+- **フレームワーク**: Nuxt 3 (Vue 3)
+- **相関図描画**: vis-network
+- **AI解析**: Google Gemini API
+- **ファイル処理**: SheetJS (xlsx)
+
+## セットアップ
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+`.env` ファイルを作成し、Gemini APIキーを設定：
 
-Start the development server on `http://localhost:3000`:
+```
+NUXT_GEMINI_API_KEY=your_api_key_here
+```
+
+開発サーバーの起動：
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+ブラウザで `http://localhost:3000` を開く。
 
-Build the application for production:
+## 使い方
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+1. テキストエリアに物語テキストを貼り付けるか、ファイル（Excel / CSV / JSON / TXT）をアップロード
+2. 「解析実行」ボタンをクリック
+3. 相関図タブで結果を確認。右サイドバーでキャラクターの関係性一覧を参照
+4. 必要に応じてJSONをダウンロードするか、正解JSONと比較してF1評価を実施
