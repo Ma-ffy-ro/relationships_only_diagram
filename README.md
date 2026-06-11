@@ -6,6 +6,7 @@
 
 入力画面
 ![入力画面](relationships_before.png)
+※表示されている作品は、著作権フリー作品（AI生成物語）
 
 解析結果（相関図）
 ![解析結果](relationships_after.png)
